@@ -1,5 +1,2245 @@
 [
   {
+    "id": "1999dc1c-b4f0-4f98-aebe-f750cb8fe0df",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:32:28.416Z",
+    "ph": 6.55,
+    "gas": 111,
+    "temperature": 4.9,
+    "humidity": 64,
+    "tds": 4.7,
+    "turbidity": 1.29,
+    "color": "White / Off-White",
+    "weight": 258,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.55",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "111 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 41,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.9 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "64%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 64,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.7",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "b209ff19-5e1a-4180-b1df-2964eddebf8f",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:32:18.418Z",
+    "ph": 6.62,
+    "gas": 120,
+    "temperature": 5.1,
+    "humidity": 61,
+    "tds": 4.7,
+    "turbidity": 1.3,
+    "color": "White / Off-White",
+    "weight": 254,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.62",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "120 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 44,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.1 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "61%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 61,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.7",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "a9b25d86-cbfd-4bb0-86cb-a55195c2337e",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:32:08.397Z",
+    "ph": 6.56,
+    "gas": 85,
+    "temperature": 5.2,
+    "humidity": 66,
+    "tds": 4.95,
+    "turbidity": 1.54,
+    "color": "White / Off-White",
+    "weight": 241,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.56",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "85 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 31,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "66%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 66,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.95",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "0007e258-5171-40fd-93ce-5b8e7328147d",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:58.393Z",
+    "ph": 6.65,
+    "gas": 103,
+    "temperature": 5.2,
+    "humidity": 59,
+    "tds": 4.83,
+    "turbidity": 1.25,
+    "color": "White / Off-White",
+    "weight": 255,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.65",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "103 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 38,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "59%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 59,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.83",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 54,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "9866d9ec-693a-4cdd-8472-ed5de3ef7139",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:48.380Z",
+    "ph": 6.59,
+    "gas": 85,
+    "temperature": 4.7,
+    "humidity": 64,
+    "tds": 4.94,
+    "turbidity": 1.44,
+    "color": "White / Off-White",
+    "weight": 248,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.59",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "85 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 31,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.7 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "64%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 64,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.94",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "72943d05-6bcb-49cd-8164-396b33588c48",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:38.380Z",
+    "ph": 6.54,
+    "gas": 101,
+    "temperature": 4.5,
+    "humidity": 60,
+    "tds": 4.99,
+    "turbidity": 1.37,
+    "color": "White / Off-White",
+    "weight": 249,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.54",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "101 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 37,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.5 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 11,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "60%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 60,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.99",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "9d58aab0-874a-4dd8-95e2-bc984b3a052f",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:28.373Z",
+    "ph": 6.62,
+    "gas": 90,
+    "temperature": 5.2,
+    "humidity": 66,
+    "tds": 4.65,
+    "turbidity": 1.48,
+    "color": "White / Off-White",
+    "weight": 246,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.62",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "90 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 33,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "66%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 66,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.65",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "3f2769fe-d1b9-4d31-ab21-0c9d66c53d52",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:18.369Z",
+    "ph": 6.65,
+    "gas": 88,
+    "temperature": 5.1,
+    "humidity": 59,
+    "tds": 4.8,
+    "turbidity": 1.27,
+    "color": "White / Off-White",
+    "weight": 256,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.65",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "88 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 33,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.1 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "59%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 59,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.8",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 53,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "cead09e1-4bc7-4c97-9c72-33298878951e",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:31:08.370Z",
+    "ph": 6.65,
+    "gas": 119,
+    "temperature": 4.7,
+    "humidity": 61,
+    "tds": 4.81,
+    "turbidity": 1.35,
+    "color": "White / Off-White",
+    "weight": 251,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.65",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "119 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 44,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.7 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "61%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 61,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.81",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 53,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "7d2cf7ea-7509-4db5-9269-e1c4da150e00",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:58.366Z",
+    "ph": 6.65,
+    "gas": 103,
+    "temperature": 5.1,
+    "humidity": 60,
+    "tds": 4.62,
+    "turbidity": 1.51,
+    "color": "White / Off-White",
+    "weight": 242,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.65",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "103 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 38,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.1 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "60%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 60,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.62",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 51,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "9263d55e-6aed-4eba-9da6-475f749209d0",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:48.347Z",
+    "ph": 6.6,
+    "gas": 94,
+    "temperature": 5.2,
+    "humidity": 57,
+    "tds": 4.91,
+    "turbidity": 1.57,
+    "color": "White / Off-White",
+    "weight": 240,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.60",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "94 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 35,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "57%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 57,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.91",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "88256b84-4fa2-4cf2-80e5-1722e166e80c",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:38.352Z",
+    "ph": 6.66,
+    "gas": 84,
+    "temperature": 4.5,
+    "humidity": 58,
+    "tds": 4.98,
+    "turbidity": 1.5,
+    "color": "White / Off-White",
+    "weight": 240,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.66",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "84 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 31,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.5 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 11,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "58%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 58,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.98",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "7d9bb2f0-e813-473e-9b70-10e7e100a4bd",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:28.340Z",
+    "ph": 6.61,
+    "gas": 111,
+    "temperature": 4.7,
+    "humidity": 67,
+    "tds": 4.71,
+    "turbidity": 1.46,
+    "color": "White / Off-White",
+    "weight": 250,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.61",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "111 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 41,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.7 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "67%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 67,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.71",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "4b8ce540-9ed6-4baf-9dc7-221427773875",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:18.332Z",
+    "ph": 6.63,
+    "gas": 96,
+    "temperature": 5.2,
+    "humidity": 63,
+    "tds": 4.81,
+    "turbidity": 1.34,
+    "color": "White / Off-White",
+    "weight": 248,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.63",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "96 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 36,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "63%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 63,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.81",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 53,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "d29f3b6d-4f4b-4a05-92c5-b39ad69d926e",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:30:08.318Z",
+    "ph": 6.63,
+    "gas": 84,
+    "temperature": 4.5,
+    "humidity": 57,
+    "tds": 4.67,
+    "turbidity": 1.23,
+    "color": "White / Off-White",
+    "weight": 256,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.63",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "84 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 31,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.5 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 11,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "57%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 57,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.67",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "446c4cd7-cf2d-440a-86d1-c01f438c9b05",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:58.309Z",
+    "ph": 6.64,
+    "gas": 113,
+    "temperature": 5,
+    "humidity": 60,
+    "tds": 4.97,
+    "turbidity": 1.29,
+    "color": "White / Off-White",
+    "weight": 245,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.64",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "113 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 42,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.0 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "60%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 60,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.97",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "9e447db5-1c18-44f4-aeff-3f5adc423584",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:48.293Z",
+    "ph": 6.6,
+    "gas": 115,
+    "temperature": 4.8,
+    "humidity": 57,
+    "tds": 4.97,
+    "turbidity": 1.58,
+    "color": "White / Off-White",
+    "weight": 258,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.60",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "115 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 43,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.8 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "57%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 57,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.97",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "43dbdb40-7651-4575-86ef-f65221ee2de4",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:38.285Z",
+    "ph": 6.62,
+    "gas": 94,
+    "temperature": 4.7,
+    "humidity": 60,
+    "tds": 4.98,
+    "turbidity": 1.52,
+    "color": "White / Off-White",
+    "weight": 255,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.62",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "94 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 35,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.7 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "60%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 60,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.98",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "937ddf1f-dd53-4eeb-968f-7c5efa5019bd",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:28.282Z",
+    "ph": 6.6,
+    "gas": 94,
+    "temperature": 4.9,
+    "humidity": 55,
+    "tds": 5,
+    "turbidity": 1.58,
+    "color": "White / Off-White",
+    "weight": 241,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.60",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "94 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 35,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.9 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "55%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 55,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "5",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 56,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "a6f3d9f9-7483-477d-ba06-8c03c999fdfe",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:18.272Z",
+    "ph": 6.58,
+    "gas": 117,
+    "temperature": 4.5,
+    "humidity": 67,
+    "tds": 4.68,
+    "turbidity": 1.56,
+    "color": "White / Off-White",
+    "weight": 259,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.58",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "117 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 43,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.5 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 11,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "67%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 67,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.68",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "df85ec42-5e27-40ca-939c-5426053d4dce",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:29:08.252Z",
+    "ph": 6.67,
+    "gas": 98,
+    "temperature": 4.7,
+    "humidity": 60,
+    "tds": 4.89,
+    "turbidity": 1.23,
+    "color": "White / Off-White",
+    "weight": 242,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.67",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "98 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 36,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.7 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "60%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 60,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.89",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 54,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "ab273d8e-5e68-4650-94d7-9657ea408d50",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:58.244Z",
+    "ph": 6.56,
+    "gas": 94,
+    "temperature": 5.1,
+    "humidity": 63,
+    "tds": 4.6,
+    "turbidity": 1.33,
+    "color": "White / Off-White",
+    "weight": 243,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.56",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "94 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 35,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.1 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "63%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 63,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.6",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 51,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "16c0bc9a-6fb5-4891-942d-9a68e784764c",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:48.228Z",
+    "ph": 6.67,
+    "gas": 91,
+    "temperature": 5,
+    "humidity": 58,
+    "tds": 4.62,
+    "turbidity": 1.48,
+    "color": "White / Off-White",
+    "weight": 240,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.67",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "91 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 34,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.0 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "58%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 58,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.62",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 51,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "b87e85b8-9fcd-41ff-a059-ae31e05df4f7",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:38.216Z",
+    "ph": 6.54,
+    "gas": 117,
+    "temperature": 4.9,
+    "humidity": 59,
+    "tds": 4.88,
+    "turbidity": 1.53,
+    "color": "White / Off-White",
+    "weight": 250,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.54",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "117 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 43,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.9 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "59%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 59,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.88",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 54,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "3489dce8-c0d0-4333-ac5a-b1d1b45ed838",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:28.204Z",
+    "ph": 6.56,
+    "gas": 92,
+    "temperature": 5,
+    "humidity": 61,
+    "tds": 4.65,
+    "turbidity": 1.26,
+    "color": "White / Off-White",
+    "weight": 250,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.56",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "92 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 34,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.0 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "61%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 61,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.65",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "2c1206ae-5481-4553-bdd0-8fbfcd57669c",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:18.197Z",
+    "ph": 6.63,
+    "gas": 105,
+    "temperature": 4.9,
+    "humidity": 62,
+    "tds": 4.89,
+    "turbidity": 1.56,
+    "color": "White / Off-White",
+    "weight": 245,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.63",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "105 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 39,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.9 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "62%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 62,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.89",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 54,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "51e23996-f9c1-4d60-b668-f1cb951c94db",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:28:08.182Z",
+    "ph": 6.67,
+    "gas": 92,
+    "temperature": 4.8,
+    "humidity": 58,
+    "tds": 4.64,
+    "turbidity": 1.51,
+    "color": "White / Off-White",
+    "weight": 253,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.67",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 48,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "92 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 34,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "4.8 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 12,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "58%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 58,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.64",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
+    "id": "b4d36b14-7825-48de-ad09-794510810f5d",
+    "foodType": "milk",
+    "timestamp": "2026-09-29T13:27:58.196Z",
+    "ph": 6.58,
+    "gas": 92,
+    "temperature": 5.2,
+    "humidity": 58,
+    "tds": 4.69,
+    "turbidity": 1.54,
+    "color": "White / Off-White",
+    "weight": 258,
+    "qualityScore": 100,
+    "status": "FRESH",
+    "reasons": [],
+    "parameters": [
+      {
+        "name": "pH Level",
+        "key": "ph",
+        "value": "6.58",
+        "unit": "",
+        "safeRange": "6.4 – 6.8",
+        "status": "SAFE",
+        "percent": 47,
+        "icon": "💧"
+      },
+      {
+        "name": "Gas (MQ135)",
+        "key": "gas",
+        "value": "92 ppm",
+        "unit": "ppm",
+        "safeRange": "< 180 ppm",
+        "status": "SAFE",
+        "percent": 34,
+        "icon": "☁"
+      },
+      {
+        "name": "Temperature",
+        "key": "temperature",
+        "value": "5.2 °C",
+        "unit": "°C",
+        "safeRange": "≤ 7 °C",
+        "status": "SAFE",
+        "percent": 13,
+        "icon": "♨"
+      },
+      {
+        "name": "Humidity",
+        "key": "humidity",
+        "value": "58%",
+        "unit": "%",
+        "safeRange": "50 – 75%",
+        "status": "SAFE",
+        "percent": 58,
+        "icon": "💧"
+      },
+      {
+        "name": "TDS",
+        "key": "tds",
+        "value": "4.69",
+        "unit": "",
+        "safeRange": "≤ 6",
+        "status": "SAFE",
+        "percent": 52,
+        "icon": "◉"
+      },
+      {
+        "name": "Color / Appearance",
+        "key": "color",
+        "value": "White / Off-White",
+        "unit": "",
+        "safeRange": "White / Off-White",
+        "status": "SAFE",
+        "percent": 100,
+        "icon": "👁"
+      }
+    ],
+    "recommendation": "Quality parameters meet safety standards. Food sample is fresh and safe for consumption.",
+    "source": "MOCK_ESP32"
+  },
+  {
     "id": "e3e7a0f3-405b-4c0b-a40d-d63d9da3a124",
     "foodType": "milk",
     "timestamp": "2026-09-29T13:27:48.173Z",
