@@ -1,0 +1,15 @@
+<div class="food-tabs-container">
+  <div class="food-tabs">
+    <% (foods || []).forEach(f => { %>
+      <a class="food-tab <%= (typeof selectedFood !== 'undefined' && selectedFood === f.key) ? 'selected' : '' %>"
+         href="?food=<%= f.key %>"
+         onclick="switchActiveFood('<%= f.key %>');">
+        <span class="tab-icon"><%= f.icon %></span>
+        <span class="tab-name"><%= f.name %></span>
+      </a>
+    <% }) %>
+    <a class="food-tab tab-add" href="/food-types" title="Add custom food profile">
+      <span>＋</span> Manage Profiles
+    </a>
+  </div>
+</div>

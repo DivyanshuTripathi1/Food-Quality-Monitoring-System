@@ -1,0 +1,33 @@
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation">☰</button>
+    <div class="crumb">
+      <span class="crumb-icon">🍃</span>
+      <span class="crumb-title"><%= title %></span>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <div class="device-pill" id="topbarDevicePill" title="Click to test device ping" onclick="pingDevice()">
+      <i class="status-pulse"></i>
+      <span class="pill-title"><%= (typeof device !== 'undefined' && device && device.mode && device.mode.includes('MOCK')) ? 'ESP32 Sim' : 'ESP32 HW' %></span>
+      <span class="pill-badge" id="topbarPingLabel">Online</span>
+    </div>
+
+    <button class="topbar-btn" id="soundToggleBtn" onclick="toggleSoundAlerts()" title="Toggle spoilage alarm sound">
+      <span id="soundIcon">🔔</span>
+    </button>
+
+    <button class="topbar-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+      <span id="themeIcon">🌓</span>
+    </button>
+
+    <a href="/about" class="profile-card" title="View Developers & Project Team">
+      <div class="avatar" style="background: linear-gradient(135deg, #0f766e, #10b981);">DT</div>
+      <div class="profile-details">
+        <b>Divyanshu &amp; Pranjal</b>
+        <small>Developers &amp; Team ↗</small>
+      </div>
+    </a>
+  </div>
+</header>

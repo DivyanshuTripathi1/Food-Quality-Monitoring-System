@@ -1,0 +1,143 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'history' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <h1>Quality Inspection Certificate</h1>
+        <p>Comprehensive sensor verification report and compliance audit.</p>
+      </div>
+      <div class="heading-actions">
+        <a href="/history" class="btn btn-outline">← Back to History</a>
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Certificate</button>
+        <% if (row) { %>
+          <button class="btn btn-outline-danger" onclick="deleteHistoryRow('<%= row.id %>', true)">🗑️ Delete Record</button>
+        <% } %>
+      </div>
+    </div>
+
+    <% if (!row) { %>
+      <div class="card empty-certificate">
+        <h2>Record Not Found</h2>
+        <p class="text-muted">The requested sensor reading could not be located in the database.</p>
+        <a href="/history" class="btn btn-primary" style="margin-top:16px;">Return to History</a>
+      </div>
+    <% } else { %>
+      <!-- Official Certificate Card -->
+      <section class="card certificate-sheet" id="certificateSheet">
+        <div class="certificate-top">
+          <div class="cert-brand">
+            <span class="cert-leaf">🍃</span>
+            <div>
+              <h2>FoodGuard IoT Inspection Lab</h2>
+              <small>Multi-Parameter Food Quality & Safety Analysis Certificate</small>
+            </div>
+          </div>
+          <div class="cert-meta">
+            <div><span>Certificate ID:</span> <code><%= row.id %></code></div>
+            <div><span>Timestamp:</span> <b><%= new Date(row.timestamp).toLocaleString('en-IN') %></b></div>
+            <div><span>Source:</span> <span class="badge badge-source"><%= row.source || 'ESP32' %></span></div>
+          </div>
+        </div>
+
+        <div class="certificate-divider"></div>
+
+        <div class="cert-hero">
+          <div class="cert-food-title">
+            <span class="cert-food-icon"><%= profile ? profile.icon : '🍽️' %></span>
+            <div>
+              <h3><%= profile ? profile.name : row.foodType %></h3>
+              <p class="text-muted"><%= profile ? profile.description : 'Standard food sample.' %></p>
+            </div>
+          </div>
+
+          <div class="cert-verdict-seal <%= row.status.toLowerCase() %>">
+            <div class="seal-score">
+              <b><%= row.qualityScore %></b>
+              <small>/ 100</small>
+            </div>
+            <div class="seal-status"><%= row.status %></div>
+          </div>
+        </div>
+
+        <!-- Parameter Breakdown Table -->
+        <h4 class="cert-section-title">Physicochemical & Gas Sensor Breakdown</h4>
+        <div class="table-wrap">
+          <table class="cert-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Measured Value</th>
+                <th>Target Reference Range</th>
+                <th>Compliance Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% const params = row.parameters || [
+                { name: 'pH Level', value: row.ph, safeRange: (profile ? `${profile.phMin} – ${profile.phMax}` : '6.4 – 6.8'), status: (row.ph >= (profile?.phMin || 6.4) && row.ph <= (profile?.phMax || 6.8) ? 'SAFE' : 'WARNING') },
+                { name: 'Gas (MQ-135)', value: row.gas + ' ppm', safeRange: '< ' + (profile ? profile.gasMax : 180) + ' ppm', status: (row.gas <= (profile?.gasMax || 180) ? 'SAFE' : 'DANGER') },
+                { name: 'Temperature', value: row.temperature + ' °C', safeRange: '≤ ' + (profile ? profile.tempMax : 7.0) + ' °C', status: (row.temperature <= (profile?.tempMax || 7.0) ? 'SAFE' : 'WARNING') },
+                { name: 'Relative Humidity', value: row.humidity + ' %', safeRange: (profile ? `${profile.humidityMin} – ${profile.humidityMax}%` : '50 – 75%'), status: 'SAFE' },
+                { name: 'TDS Solids', value: row.tds, safeRange: '≤ ' + (profile ? profile.tdsMax : 6.0), status: 'SAFE' },
+                { name: 'Optical Color', value: row.color || 'Normal', safeRange: profile?.expectedColor || 'Normal', status: (row.color && row.color.toLowerCase().includes('yellow') ? 'WARNING' : 'SAFE') }
+              ]; %>
+              <% params.forEach(p => { %>
+                <tr>
+                  <td><b><%= p.name %></b></td>
+                  <td><code><%= p.value %></code></td>
+                  <td><%= p.safeRange %></td>
+                  <td>
+                    <span class="status-chip <%= p.status.toLowerCase() %>"><%= p.status %></span>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Evaluation Reasons & Diagnostics -->
+        <div class="cert-diagnostics">
+          <h4 class="cert-section-title">Diagnostic Findings</h4>
+          <% if (row.reasons && row.reasons.length > 0) { %>
+            <ul class="reasons-list">
+              <% row.reasons.forEach(r => { %>
+                <li class="reason-item text-amber">⚠️ <%= r %></li>
+              <% }) %>
+            </ul>
+          <% } else { %>
+            <p class="text-emerald">✓ All monitored physical and chemical markers are in full compliance with the reference profile standards.</p>
+          <% } %>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="cert-recommendations">
+          <h4 class="cert-section-title">Recommended Storage & Handling Action</h4>
+          <div class="recommendation-box <%= row.status.toLowerCase() %>">
+            <p>
+              <%= row.recommendation || (row.status === 'FRESH'
+                ? 'Sample quality is optimal. Safe for distribution and direct consumption.'
+                : row.status === 'WARNING'
+                ? 'Sample exhibits early degradation signs or cold chain deviation. Inspect organoleptic properties before use.'
+                : 'CRITICAL HAZARD: Spoilage vapors or chemical degradation detected. Condemn and discard immediately.') %>
+            </p>
+          </div>
+        </div>
+
+        <div class="cert-footer">
+          <div class="cert-sign">
+            <span class="sign-line"></span>
+            <small>Automated IoT Sensor Telemetry Verification</small>
+          </div>
+          <div class="cert-date">
+            <small>Verified on Node: <%= device.id %></small>
+          </div>
+        </div>
+      </section>
+    <% } %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

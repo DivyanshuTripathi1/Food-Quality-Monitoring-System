@@ -1,0 +1,181 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'analytics' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <h1>Food Safety Analytics & Trends</h1>
+        <p>Comprehensive sensory evaluation telemetry, spoilage probability analysis, and longitudinal trends.</p>
+      </div>
+      <div class="heading-actions">
+        <select class="form-select" onchange="location='/analytics?food='+this.value">
+          <option value="all" <%= selectedFood === 'all' ? 'selected' : '' %>>All Food Categories</option>
+          <% (foods || []).forEach(f => { %>
+            <option value="<%= f.key %>" <%= selectedFood === f.key ? 'selected' : '' %>><%= f.icon %> <%= f.name %></option>
+          <% }) %>
+        </select>
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print Analytics</button>
+      </div>
+    </div>
+
+    <!-- Executive KPI Summary Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon icon-emerald">🔬</div>
+        <div class="kpi-data">
+          <small>TOTAL SAMPLES TESTED</small>
+          <b><%= stats ? stats.total : 0 %></b>
+          <span class="kpi-trend">Rolling 20-day window</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon icon-emerald">✓</div>
+        <div class="kpi-data">
+          <small>FRESH COMPLIANCE RATE</small>
+          <b class="text-emerald"><%= stats ? stats.freshRate : 0 %>%</b>
+          <span class="kpi-sub"><%= stats ? stats.fresh : 0 %> Samples Approved</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon icon-amber">!</div>
+        <div class="kpi-data">
+          <small>WARNING / BORDERLINE</small>
+          <b class="text-amber"><%= stats ? stats.warningRate : 0 %>%</b>
+          <span class="kpi-sub"><%= stats ? stats.warning : 0 %> Samples Flagged</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon icon-rose">✕</div>
+        <div class="kpi-data">
+          <small>SPOILED / CONTAMINATED</small>
+          <b class="text-rose"><%= stats ? stats.spoiledRate : 0 %>%</b>
+          <span class="kpi-sub"><%= stats ? stats.spoiled : 0 %> Unsafe Samples</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon icon-blue">★</div>
+        <div class="kpi-data">
+          <small>AVERAGE QUALITY SCORE</small>
+          <b><%= stats ? stats.avgScore : 0 %> <small>/ 100</small></b>
+          <span class="kpi-trend">Global Quality Index</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Charts Grid -->
+    <div class="analytics-charts-grid">
+      <!-- Chart 1: Donut Quality Breakdown -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🍩</span>
+            <b>Quality Classification Breakdown</b>
+          </div>
+          <span class="badge badge-subtle">Percent Split</span>
+        </div>
+        <div class="chart-container" style="position:relative; height: 260px;">
+          <canvas id="qualityDonutChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Chart 2: Test Counts by Food Type -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📊</span>
+            <b>Tests by Food Category</b>
+          </div>
+          <span class="badge badge-subtle">Sample Distribution</span>
+        </div>
+        <div class="chart-container" style="position:relative; height: 260px;">
+          <canvas id="foodVolumeChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Chart 3: Average Physicochemical Values -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🌡️</span>
+            <b>Average Sensor Levels Across Tested Foods</b>
+          </div>
+          <span class="badge badge-subtle">pH, Temp & Gas</span>
+        </div>
+        <div class="chart-container" style="position:relative; height: 260px;">
+          <canvas id="avgParamsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Chart 4: MQ-135 Gas vs Quality Score Correlation -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>☁</span>
+            <b>MQ-135 Gas vs Quality Score Correlation</b>
+          </div>
+          <span class="badge badge-subtle">Spoilage Correlation</span>
+        </div>
+        <div class="chart-container" style="position:relative; height: 260px;">
+          <canvas id="gasScoreTimelineChart"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <!-- Automated Insights & Observations -->
+    <section class="card insights-card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>💡</span>
+          <b>Automated Quality Observations & Anomaly Analysis</b>
+        </div>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-item">
+          <span class="insight-bullet">1</span>
+          <div>
+            <b>Primary Spoilage Indicator</b>
+            <p>Elevated MQ-135 sensor readings (> 180 ppm) strongly correlate with bacterial decomposition and volatile organic amine release in high temperature conditions.</p>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-bullet">2</span>
+          <div>
+            <b>Cold Chain Compliance</b>
+            <p>Dairy milk and cottage cheese (paneer) maintained above 8°C exhibit a 3.4x higher rate of acidic pH shift (lactic fermentation) within 24 hours.</p>
+          </div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-bullet">3</span>
+          <div>
+            <b>Potable Water Integrity</b>
+            <p>Water samples showed consistent neutrality (pH 7.1 – 7.4) and low TDS (&lt; 4.5), confirming strict adherence to drinking water quality standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
+
+<script id="foodguard-analytics-data" type="text/template">
+<%- JSON.stringify({
+  stats: stats || {},
+  rows: rows ? rows.slice(0, 50).reverse() : [],
+  foods: foods || []
+}) %>
+</script>
+<script>
+  try {
+    window.FOODGUARD_ANALYTICS_DATA = JSON.parse(document.getElementById('foodguard-analytics-data').textContent || '{}');
+  } catch (e) {
+    window.FOODGUARD_ANALYTICS_DATA = { stats: {}, rows: [], foods: [] };
+  }
+</script>

@@ -1,0 +1,16 @@
+{
+  "mockEsp32": true,
+  "mockIntervalSeconds": 10,
+  "historyDays": 20,
+  "deviceId": "ESP32-FOODGUARD-01",
+  "wifiSsid": "FoodGuard-DemoWiFi",
+  "ipAddress": "192.168.4.2",
+  "soundAlerts": true,
+  "tempUnit": "C",
+  "phCalibrationOffset": 0,
+  "tempOffset": 0,
+  "gasBaseline": 100,
+  "autoRefreshSeconds": 3,
+  "emailAlerts": false,
+  "alertEmail": "lab@foodguard.edu"
+}

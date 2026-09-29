@@ -1,0 +1,35 @@
+{
+  "name": "foodguard",
+  "version": "1.0.0",
+  "description": "Smart Multi-Parameter Food Quality Monitoring System with IoT, ESP32, and Real-Time Spoilage Detection",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "iot",
+    "esp32",
+    "food-safety",
+    "food-quality",
+    "sensor-telemetry",
+    "express",
+    "nodejs",
+    "ejs",
+    "chartjs"
+  ],
+  "authors": [
+    "Divyanshu Tripathi",
+    "Pranjal Shahi"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,173 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'history' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <h1>Test History & Audit Logs</h1>
+        <p>Complete historical sensor records, quality classifications, and compliance metrics (Rolling <%= settings.historyDays %>-day retention).</p>
+      </div>
+      <div class="heading-actions">
+        <button class="btn btn-emerald" onclick="openManualModal()">＋ New Test Record</button>
+        <a class="btn btn-outline" href="/api/history/export-csv" download>⇩ Download CSV</a>
+        <a class="btn btn-outline" href="/api/history" target="_blank">⇩ Raw JSON</a>
+        <button class="btn btn-outline-danger" onclick="confirmClearHistory()">🗑️ Clear History</button>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="card filter-bar-card">
+      <form class="filter-form" method="GET" action="/history">
+        <div class="filter-inputs">
+          <div class="form-group-inline">
+            <label for="search">Search</label>
+            <input type="text" id="search" name="search" class="form-control" placeholder="Search by ID, color, status..." value="<%= searchQuery || '' %>">
+          </div>
+
+          <div class="form-group-inline">
+            <label for="food">Food Item</label>
+            <select id="food" name="food" class="form-control">
+              <option value="all">All Foods</option>
+              <% (foods || []).forEach(f => { %>
+                <option value="<%= f.key %>" <%= selectedFood === f.key ? 'selected' : '' %>><%= f.icon %> <%= f.name %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group-inline">
+            <label for="status">Quality Status</label>
+            <select id="status" name="status" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="FRESH" <%= selectedStatus === 'FRESH' ? 'selected' : '' %>>Fresh (>=80)</option>
+              <option value="WARNING" <%= selectedStatus === 'WARNING' ? 'selected' : '' %>>Warning (55-79)</option>
+              <option value="SPOILED" <%= selectedStatus === 'SPOILED' ? 'selected' : '' %>>Spoiled (&lt;55)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-buttons">
+          <button type="submit" class="btn btn-primary">Apply Filters</button>
+          <a href="/history" class="btn btn-ghost">Reset</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Historical Data Table -->
+    <section class="card history-table-card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>📋</span>
+          <b>Inspection Records</b>
+          <span class="badge badge-subtle"><%= totalRecords %> Total Matching Records</span>
+        </div>
+        <div class="table-legend">
+          <span class="legend-item"><i class="dot dot-green"></i> Fresh</span>
+          <span class="legend-item"><i class="dot dot-amber"></i> Warning</span>
+          <span class="legend-item"><i class="dot dot-red"></i> Spoiled</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Food Item</th>
+              <th>pH Level</th>
+              <th>Gas (MQ135)</th>
+              <th>Temp (°C)</th>
+              <th>Humidity</th>
+              <th>TDS</th>
+              <th>Color</th>
+              <th>Quality Score</th>
+              <th>Status</th>
+              <th>Source</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if ((rows || []).length === 0) { %>
+              <tr>
+                <td colspan="12" class="text-center" style="padding: 40px;">
+                  <div class="empty-state">
+                    <span style="font-size: 36px;">🍃</span>
+                    <h3>No Records Found</h3>
+                    <p class="text-muted">No sensor readings match your current filters.</p>
+                    <button class="btn btn-primary btn-sm" onclick="triggerQuickRead()">Generate Test Reading</button>
+                  </div>
+                </td>
+              </tr>
+            <% } else { %>
+              <% rows.forEach(r => { %>
+                <tr id="row-<%= r.id %>">
+                  <td><%= new Date(r.timestamp).toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' }) %></td>
+                  <td>
+                    <span class="food-chip">
+                      <%= (foods.find(f => f.key === r.foodType) ? foods.find(f => f.key === r.foodType).icon : '🍽️') %>
+                      <%= (foods.find(f => f.key === r.foodType) ? foods.find(f => f.key === r.foodType).name : r.foodType) %>
+                    </span>
+                  </td>
+                  <td><b><%= r.ph %></b></td>
+                  <td><%= r.gas %> ppm</td>
+                  <td><%= r.temperature %> °C</td>
+                  <td><%= r.humidity %> %</td>
+                  <td><%= r.tds %></td>
+                  <td><%= r.color || 'Normal' %></td>
+                  <td>
+                    <span class="score-badge <%= r.qualityScore >= 80 ? 'high' : r.qualityScore >= 55 ? 'med' : 'low' %>">
+                      <%= r.qualityScore %> / 100
+                    </span>
+                  </td>
+                  <td>
+                    <span class="status-chip <%= r.status.toLowerCase() %>">
+                      <%= r.status %>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge badge-source"><%= r.source || 'ESP32' %></span>
+                  </td>
+                  <td>
+                    <div class="action-btn-group">
+                      <a href="/reading/<%= r.id %>" class="btn-table-action" title="View Full Inspection Certificate">
+                        Certificate ↗
+                      </a>
+                      <button class="btn-table-delete" onclick="deleteHistoryRow('<%= r.id %>')" title="Delete this entry">
+                        ✕
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <% if (totalPages > 1) { %>
+        <div class="pagination-footer">
+          <span class="page-info">
+            Page <b><%= currentPage %></b> of <b><%= totalPages %></b> (<%= totalRecords %> records)
+          </span>
+          <div class="page-nav">
+            <% if (currentPage > 1) { %>
+              <a href="?page=<%= currentPage - 1 %>&food=<%= selectedFood %>&status=<%= selectedStatus %>&search=<%= searchQuery %>" class="btn btn-sm btn-outline">← Prev</a>
+            <% } %>
+            <% for (let p = Math.max(1, currentPage - 2); p <= Math.min(totalPages, currentPage + 2); p++) { %>
+              <a href="?page=<%= p %>&food=<%= selectedFood %>&status=<%= selectedStatus %>&search=<%= searchQuery %>"
+                 class="btn btn-sm <%= p === currentPage ? 'btn-primary' : 'btn-outline' %>"><%= p %></a>
+            <% } %>
+            <% if (currentPage < totalPages) { %>
+              <a href="?page=<%= currentPage + 1 %>&food=<%= selectedFood %>&status=<%= selectedStatus %>&search=<%= searchQuery %>" class="btn btn-sm btn-outline">Next →</a>
+            <% } %>
+          </div>
+        </div>
+      <% } %>
+    </section>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

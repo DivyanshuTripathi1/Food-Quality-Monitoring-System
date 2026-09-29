@@ -1,0 +1,227 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'live' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <div class="live-status-pill">
+          <span class="live-dot-pulse"></span>
+          <span class="live-dot-text">LIVE TELEMETRY STREAM</span>
+        </div>
+        <h1>Live Sensor Cockpit</h1>
+        <p>Continuous data streaming from ESP32 microcontroller and real-time rule evaluation engine.</p>
+      </div>
+      <div class="live-toolbar">
+        <button class="btn btn-outline" id="livePauseBtn" onclick="toggleLiveStream()">⏸ Pause Stream</button>
+        <button class="btn btn-emerald" onclick="triggerQuickRead()">⚡ Trigger Read</button>
+        <button class="btn btn-amber" onclick="triggerQuickAnomaly()">⚠️ Inject Anomaly</button>
+      </div>
+    </div>
+
+    <!-- Food selector tabs -->
+    <%- include('../partials/foodTabs') %>
+
+    <!-- Live Telemetry Top Row -->
+    <div class="live-cockpit-grid">
+      <!-- Big Live Verdict Panel -->
+      <section class="card live-verdict-card">
+        <div class="live-verdict-inner">
+          <div class="live-node-badge">
+            <span class="node-icon">⚡</span>
+            <div>
+              <small>ACTIVE SENSOR NODE</small>
+              <b><%= device ? device.id : 'ESP32-FOODGUARD' %></b>
+            </div>
+          </div>
+          <div class="live-score-circle">
+            <svg class="score-svg" viewBox="0 0 100 100">
+              <circle class="score-bg" cx="50" cy="50" r="42"></circle>
+              <circle class="score-fill" id="liveScoreCircle" cx="50" cy="50" r="42"
+                      stroke-dasharray="264"
+                      stroke-dashoffset="<%= 264 - (264 * (latest?.qualityScore ?? 95)) / 100 %>"></circle>
+            </svg>
+            <div class="score-center-text">
+              <span class="score-val" id="liveScoreNum"><%= latest?.qualityScore ?? 95 %></span>
+              <small>SCORE</small>
+            </div>
+          </div>
+          <div class="live-verdict-status">
+            <span class="status-chip <%= latest?.status?.toLowerCase() || 'fresh' %>" id="liveStatusChip">
+              <%= latest?.status || 'FRESH' %>
+            </span>
+            <span class="live-eval-msg text-muted" id="liveRecommendation">
+              <%= latest?.recommendation || 'Parameters optimal. Safe for consumption.' %>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sensor Gauges / Parameter Meters Grid -->
+      <section class="card live-meters-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🎛</span>
+            <b>Active Sensor Meters</b>
+          </div>
+          <div class="live-latency">
+            <span>Ping: <b id="livePingMs">18ms</b></span>
+            <span>Packets: <b id="livePacketCount"><%= device ? device.packetsReceived : 1 %></b></span>
+          </div>
+        </div>
+
+        <div class="meters-grid">
+          <!-- pH Meter -->
+          <div class="meter-box">
+            <div class="meter-top">
+              <span class="meter-label">pH Sensor</span>
+              <span class="meter-badge safe" id="live-tag-ph">SAFE</span>
+            </div>
+            <div class="meter-body">
+              <span class="meter-val" id="live-val-ph"><%= latest?.ph ?? 6.65 %></span>
+              <div class="meter-gauge-bar">
+                <div class="meter-gauge-fill ph-color" id="live-gauge-ph" style="width: <%= Math.min(100, Math.max(0, ((latest?.ph ?? 6.65) / 14) * 100)) %>%"></div>
+              </div>
+              <div class="meter-scale">
+                <span>0 (Acidic)</span>
+                <span class="target-marker">Target: <%= profile ? profile.phOpt : 6.6 %></span>
+                <span>14 (Basic)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MQ-135 Gas Meter -->
+          <div class="meter-box">
+            <div class="meter-top">
+              <span class="meter-label">MQ-135 Gas</span>
+              <span class="meter-badge safe" id="live-tag-gas">SAFE</span>
+            </div>
+            <div class="meter-body">
+              <span class="meter-val" id="live-val-gas"><%= latest?.gas ?? 105 %> <small>ppm</small></span>
+              <div class="meter-gauge-bar">
+                <div class="meter-gauge-fill gas-color" id="live-gauge-gas" style="width: <%= Math.min(100, Math.max(0, ((latest?.gas ?? 105) / 300) * 100)) %>%"></div>
+              </div>
+              <div class="meter-scale">
+                <span>0 ppm</span>
+                <span class="target-marker">Max: <%= profile ? profile.gasMax : 180 %></span>
+                <span>500 ppm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Temperature Meter -->
+          <div class="meter-box">
+            <div class="meter-top">
+              <span class="meter-label">Temperature</span>
+              <span class="meter-badge safe" id="live-tag-temp">SAFE</span>
+            </div>
+            <div class="meter-body">
+              <span class="meter-val" id="live-val-temp"><%= latest?.temperature ?? 5.8 %> <small>°C</small></span>
+              <div class="meter-gauge-bar">
+                <div class="meter-gauge-fill temp-color" id="live-gauge-temp" style="width: <%= Math.min(100, Math.max(0, ((latest?.temperature ?? 5.8) / 35) * 100)) %>%"></div>
+              </div>
+              <div class="meter-scale">
+                <span>0°C</span>
+                <span class="target-marker">Limit: <%= profile ? profile.tempMax : 7.0 %>°C</span>
+                <span>40°C</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Humidity Meter -->
+          <div class="meter-box">
+            <div class="meter-top">
+              <span class="meter-label">Humidity</span>
+              <span class="meter-badge safe" id="live-tag-humidity">SAFE</span>
+            </div>
+            <div class="meter-body">
+              <span class="meter-val" id="live-val-humidity"><%= latest?.humidity ?? 62 %> <small>%</small></span>
+              <div class="meter-gauge-bar">
+                <div class="meter-gauge-fill hum-color" id="live-gauge-humidity" style="width: <%= latest?.humidity ?? 62 %>%"></div>
+              </div>
+              <div class="meter-scale">
+                <span>0%</span>
+                <span class="target-marker"><%= profile ? `${profile.humidityMin}–${profile.humidityMax}%` : '50–75%' %></span>
+                <span>100%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Live Stream Chart & Live Event Log -->
+    <div class="grid mid-grid">
+      <!-- Streaming Chart -->
+      <section class="card chart-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📈</span>
+            <b>Real-Time Continuous Stream</b>
+          </div>
+          <span class="badge badge-subtle">Auto-Pushing Packets</span>
+        </div>
+        <div class="chart-container" style="position:relative; height: 270px;">
+          <canvas id="liveStreamChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Live Event Log Console -->
+      <section class="card event-log-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📟</span>
+            <b>Sensor Event Stream</b>
+          </div>
+          <button class="btn-xs btn-outline" onclick="clearEventLog()">Clear Log</button>
+        </div>
+        <div class="terminal-window" id="eventTerminal">
+          <div class="terminal-line text-muted">[System] FoodGuard Live Telemetry initialized.</div>
+          <div class="terminal-line text-emerald">[Connected] Active sensor profile: <%= profile ? profile.name : selectedFood %></div>
+          <div class="terminal-line text-muted">[Stream] Listening on POST /api/sensor-data and Mock Simulator...</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Interactive On-The-Fly Manual Sample Tester -->
+    <section class="card quick-tester-card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>🧪</span>
+          <b>Interactive Sensor Testing Console</b>
+        </div>
+        <span class="text-muted">Adjust sliders or values to test instant rule classification</span>
+      </div>
+
+      <div class="quick-tester-grid">
+        <div class="tester-control">
+          <label>Food Item</label>
+          <select id="quickFoodType" class="form-control">
+            <% (foods || []).forEach(f => { %>
+              <option value="<%= f.key %>" <%= selectedFood === f.key ? 'selected' : '' %>><%= f.icon %> <%= f.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="tester-control">
+          <label>pH Level: <b id="sliderPhVal">6.65</b></label>
+          <input type="range" id="sliderPh" min="3.0" max="9.5" step="0.05" value="6.65" oninput="updateSliderVal('Ph', this.value)">
+        </div>
+        <div class="tester-control">
+          <label>MQ-135 Gas: <b id="sliderGasVal">110</b> ppm</label>
+          <input type="range" id="sliderGas" min="40" max="450" step="5" value="110" oninput="updateSliderVal('Gas', this.value)">
+        </div>
+        <div class="tester-control">
+          <label>Temperature: <b id="sliderTempVal">5.8</b> °C</label>
+          <input type="range" id="sliderTemp" min="0" max="35" step="0.2" value="5.8" oninput="updateSliderVal('Temp', this.value)">
+        </div>
+        <div class="tester-control tester-action">
+          <button class="btn btn-primary btn-block" onclick="submitQuickTest()">🧪 Submit & Evaluate</button>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

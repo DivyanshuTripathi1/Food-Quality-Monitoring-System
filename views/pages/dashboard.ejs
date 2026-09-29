@@ -1,0 +1,418 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'dashboard' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <!-- Hero Banner -->
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="live-blink"></span>
+          <span>IoT Hardware & Simulator Connected</span>
+        </div>
+        <h1>Multi-Parameter Food Quality Detection System</h1>
+        <p>Real-time continuous monitoring of physicochemical and volatile gas markers using IoT sensors, rule-based AI diagnostics, and threshold compliance.</p>
+        <div class="hero-actions">
+          <button class="btn btn-emerald" onclick="openManualModal()">🔬 Test Sample Now</button>
+          <button class="btn btn-amber" onclick="triggerQuickAnomaly()">⚠️ Simulate Spoilage Anomaly</button>
+          <button class="btn btn-ghost" onclick="toggleAutoRefresh()" id="autoRefreshBtn">⏸ Pause Stream</button>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="hero-stat">
+          <small>Monitored Sample</small>
+          <b><%= profile ? profile.name : selectedFood %></b>
+        </div>
+        <div class="hero-stat">
+          <small>Safe Pass Rate</small>
+          <b class="text-emerald"><%= stats ? stats.freshRate : 85 %>%</b>
+        </div>
+        <div class="hero-stat">
+          <small>Database Records</small>
+          <b><%= stats ? stats.total : 0 %></b>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Profile Tabs -->
+    <%- include('../partials/foodTabs') %>
+
+    <!-- Top Grid -->
+    <div class="grid top-grid">
+      <!-- 1. Quality Status Verdict Card -->
+      <section class="card status-card" id="statusCard">
+        <div class="card-header">
+          <div class="card-title">
+            <span>♨</span>
+            <b>Food Quality Verdict</b>
+          </div>
+          <select id="foodSelect" class="form-select-sm" onchange="switchFoodDropdown(this.value)">
+            <% (foods || []).forEach(f => { %>
+              <option value="<%= f.key %>" <%= selectedFood === f.key ? 'selected' : '' %>>
+                <%= f.icon %> <%= f.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="status-badge <%= latest?.status?.toLowerCase() || 'fresh' %>" id="verdictBadge">
+          <span class="badge-icon" id="verdictIcon">
+            <%= latest?.status === 'SPOILED' ? '✕' : latest?.status === 'WARNING' ? '!' : '✓' %>
+          </span>
+          <strong id="verdictText"><%= latest?.status || 'FRESH' %></strong>
+        </div>
+
+        <div class="score-display">
+          <div class="score-header">
+            <span class="score-label">Freshness Quality Score</span>
+            <span class="score-relative text-muted" id="lastUpdatedLabel">Just now</span>
+          </div>
+          <div class="score-row">
+            <span class="score-num" id="verdictScore"><%= latest?.qualityScore ?? 95 %></span>
+            <small class="score-max">/ 100</small>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill <%= latest?.status?.toLowerCase() || 'fresh' %>"
+                 id="scoreProgressBar"
+                 style="width: <%= latest?.qualityScore ?? 95 %>%"></div>
+          </div>
+        </div>
+
+        <div class="verdict-analysis">
+          <small class="analysis-title">DIAGNOSTIC VERDICT</small>
+          <p id="verdictAnalysisText">
+            <%= (latest?.reasons && latest.reasons.length > 0)
+                ? latest.reasons.join(' ')
+                : 'All monitored sensor parameters are within recommended reference thresholds. Food is fresh and safe.' %>
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. Live Sensor Telemetry Grid -->
+      <section class="card sensor-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>♧</span>
+            <b>Live Sensor Readings</b>
+          </div>
+          <div class="card-header-badge" id="refreshBadge">
+            <span class="pulse-dot"></span>
+            <span id="refreshLabel">Auto-refresh (3s)</span>
+          </div>
+        </div>
+
+        <div class="sensor-grid" id="sensorGrid">
+          <!-- pH Sensor -->
+          <div class="sensor-box sensor-ph" id="box-ph">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">💧</span>
+              <span class="sensor-tag safe" id="tag-ph">SAFE</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">pH Level</span>
+              <b class="sensor-value" id="val-ph"><%= latest?.ph ?? '6.65' %></b>
+              <small class="sensor-safe" id="safe-ph">Safe: <%= profile ? `${profile.phMin} – ${profile.phMax}` : '6.4 – 6.8' %></small>
+            </div>
+          </div>
+
+          <!-- MQ-135 Gas Sensor -->
+          <div class="sensor-box sensor-gas" id="box-gas">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">☁</span>
+              <span class="sensor-tag safe" id="tag-gas">SAFE</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">Gas (MQ135)</span>
+              <b class="sensor-value" id="val-gas"><%= latest?.gas ?? '105' %> ppm</b>
+              <small class="sensor-safe" id="safe-gas">Safe: &lt; <%= profile ? profile.gasMax : '180' %> ppm</small>
+            </div>
+          </div>
+
+          <!-- Temperature -->
+          <div class="sensor-box sensor-temp" id="box-temp">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">♨</span>
+              <span class="sensor-tag safe" id="tag-temp">SAFE</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">Temperature</span>
+              <b class="sensor-value" id="val-temp"><%= latest?.temperature ?? '5.8' %> °C</b>
+              <small class="sensor-safe" id="safe-temp">Safe: ≤ <%= profile ? profile.tempMax : '7.0' %> °C</small>
+            </div>
+          </div>
+
+          <!-- Humidity -->
+          <div class="sensor-box sensor-humidity" id="box-humidity">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">💧</span>
+              <span class="sensor-tag safe" id="tag-humidity">SAFE</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">Humidity</span>
+              <b class="sensor-value" id="val-humidity"><%= latest?.humidity ?? '62' %> %</b>
+              <small class="sensor-safe" id="safe-humidity">Safe: <%= profile ? `${profile.humidityMin} – ${profile.humidityMax}%` : '50 – 75%' %></small>
+            </div>
+          </div>
+
+          <!-- TDS / Turbidity -->
+          <div class="sensor-box sensor-tds" id="box-tds">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">◉</span>
+              <span class="sensor-tag safe" id="tag-tds">SAFE</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">TDS / Solids</span>
+              <b class="sensor-value" id="val-tds"><%= latest?.tds ?? '4.9' %></b>
+              <small class="sensor-safe" id="safe-tds">Safe: ≤ <%= profile ? profile.tdsMax : '6.0' %></small>
+            </div>
+          </div>
+
+          <!-- Optical Color -->
+          <div class="sensor-box sensor-color" id="box-color">
+            <div class="sensor-box-top">
+              <span class="sensor-icon">👁</span>
+              <span class="sensor-tag safe" id="tag-color">NORMAL</span>
+            </div>
+            <div class="sensor-box-body">
+              <span class="sensor-name">Optical Color</span>
+              <b class="sensor-value" id="val-color"><%= latest?.color ?? 'Normal' %></b>
+              <small class="sensor-safe" id="safe-color"><%= profile?.expectedColor || 'White / Off-White' %></small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Interactive Camera & Visual Inspection -->
+      <section class="card camera-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📷</span>
+            <b>Sample Visual Camera</b>
+          </div>
+          <span class="badge badge-subtle">WebCam / ESP32-CAM</span>
+        </div>
+
+        <div class="camera-viewport" id="cameraViewport">
+          <video id="cameraVideo" autoplay playsinline style="display:none; width:100%; height:100%; object-fit:cover; border-radius:10px;"></video>
+          <canvas id="cameraCanvas" style="display:none;"></canvas>
+          <img id="capturedImagePreview" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:10px;" alt="Sample snapshot" />
+
+          <div class="camera-placeholder" id="cameraPlaceholder">
+            <div class="cam-lens">
+              <div class="cam-lens-inner">👁</div>
+            </div>
+            <p>Live WebCam or ESP32-CAM stream</p>
+            <small class="text-muted">Click below to activate device webcam</small>
+          </div>
+        </div>
+
+        <div class="camera-controls">
+          <button class="btn btn-sm btn-primary" id="startCamBtn" onclick="toggleWebcam()">📹 Open WebCam</button>
+          <button class="btn btn-sm btn-emerald" id="snapCamBtn" onclick="captureAndAnalyze()" style="display:none;">▣ Snap & Analyze</button>
+          <label class="btn btn-sm btn-outline" style="cursor:pointer;">
+            📁 Upload
+            <input type="file" id="imageUploadInput" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+          </label>
+        </div>
+
+        <div class="visual-analysis-box" id="visualAnalysisResult" style="display:none;">
+          <div class="analysis-status-row">
+            <span class="badge badge-emerald" id="visualStatusBadge">Visual Normal</span>
+            <small id="visualConfidence">Confidence: 94%</small>
+          </div>
+          <p id="visualAnalysisSummary">No surface discoloration detected.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Mid Grid: Charts & Parameter Breakdown -->
+    <div class="grid mid-grid">
+      <!-- Multi-Parameter Trend Chart -->
+      <section class="card chart-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📊</span>
+            <b>Real-Time Parameter Trend</b>
+          </div>
+          <div class="chart-tab-group">
+            <button class="chart-tab active" onclick="setChartDataset('all')">All</button>
+            <button class="chart-tab" onclick="setChartDataset('ph')">pH</button>
+            <button class="chart-tab" onclick="setChartDataset('gas')">MQ135 Gas</button>
+            <button class="chart-tab" onclick="setChartDataset('temp')">Temp</button>
+            <button class="chart-tab" onclick="setChartDataset('score')">Score</button>
+          </div>
+        </div>
+        <div class="chart-container" style="position:relative; height: 260px;">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Parameter Safety Compliance Bars -->
+      <section class="card param-status-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>⚙</span>
+            <b>Parameter Safety Compliance</b>
+          </div>
+          <span class="text-muted" style="font-size:11px;">Safe Margin Check</span>
+        </div>
+
+        <div class="param-list" id="paramStatusList">
+          <!-- Dynamic parameter bars populated by JS and seeded by EJS -->
+          <% const paramData = latest?.parameters || [
+            { name: 'pH Level', value: (latest?.ph ?? 6.65), safeRange: '6.4 – 6.8', status: 'SAFE', percent: 75 },
+            { name: 'Gas (MQ135)', value: (latest?.gas ?? 105) + ' ppm', safeRange: '< 180 ppm', status: 'SAFE', percent: 45 },
+            { name: 'Temperature', value: (latest?.temperature ?? 5.8) + ' °C', safeRange: '≤ 7.0 °C', status: 'SAFE', percent: 55 },
+            { name: 'Humidity', value: (latest?.humidity ?? 62) + ' %', safeRange: '50 – 75%', status: 'SAFE', percent: 62 },
+            { name: 'TDS Solids', value: (latest?.tds ?? 4.9), safeRange: '≤ 6.0', status: 'SAFE', percent: 49 },
+            { name: 'Color Quality', value: (latest?.color ?? 'Normal'), safeRange: 'Expected', status: 'SAFE', percent: 100 }
+          ]; %>
+          <% paramData.forEach(p => { %>
+            <div class="param-row">
+              <div class="param-info">
+                <span class="param-name"><%= p.name %></span>
+                <span class="param-safe text-muted">(<%= p.safeRange %>)</span>
+              </div>
+              <div class="param-bar-wrap">
+                <div class="param-bar-fill <%= p.status.toLowerCase() %>" style="width: <%= p.percent %>%"></div>
+              </div>
+              <div class="param-meta">
+                <b class="param-val"><%= p.value %></b>
+                <span class="param-status-tag <%= p.status.toLowerCase() %>"><%= p.status %></span>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+    </div>
+
+    <!-- Recent Test History Section -->
+    <section class="card history-card">
+      <div class="card-header">
+        <div class="card-title">
+          <span>◷</span>
+          <b>Recent Sensor Records</b>
+        </div>
+        <div class="history-actions">
+          <button class="btn btn-sm btn-outline" onclick="openManualModal()">＋ New Record</button>
+          <a class="btn btn-sm btn-outline" href="/api/history/export-csv" download>⇩ Download CSV</a>
+          <a class="btn btn-sm btn-primary" href="/history">View Full History →</a>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="recentHistoryTable">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Food Item</th>
+              <th>pH</th>
+              <th>Gas (ppm)</th>
+              <th>Temp (°C)</th>
+              <th>Humidity (%)</th>
+              <th>TDS</th>
+              <th>Color</th>
+              <th>Quality Score</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="recentHistoryBody">
+            <% (history || []).slice(0, 8).forEach(r => { %>
+              <tr>
+                <td><%= new Date(r.timestamp).toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', second:'2-digit' }) %></td>
+                <td>
+                  <span class="food-chip">
+                    <%= (foods.find(f => f.key === r.foodType) ? foods.find(f => f.key === r.foodType).icon : '🍽️') %>
+                    <%= (foods.find(f => f.key === r.foodType) ? foods.find(f => f.key === r.foodType).name : r.foodType) %>
+                  </span>
+                </td>
+                <td><b><%= r.ph %></b></td>
+                <td><%= r.gas %> ppm</td>
+                <td><%= r.temperature %> °C</td>
+                <td><%= r.humidity %> %</td>
+                <td><%= r.tds %></td>
+                <td><%= r.color || 'Normal' %></td>
+                <td>
+                  <span class="score-badge <%= r.qualityScore >= 80 ? 'high' : r.qualityScore >= 55 ? 'med' : 'low' %>">
+                    <%= r.qualityScore %> / 100
+                  </span>
+                </td>
+                <td>
+                  <span class="status-chip <%= r.status.toLowerCase() %>">
+                    <%= r.status %>
+                  </span>
+                </td>
+                <td>
+                  <a href="/reading/<%= r.id %>" class="btn-table-action" title="View Full Inspection Certificate">
+                    Certificate ↗
+                  </a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Engineering Team & About Us Quick Section -->
+    <section class="card dashboard-about-card" style="margin-top: 20px;">
+      <div class="card-header">
+        <div class="card-title">
+          <span>👥</span>
+          <b>Project Engineering Team & Developers</b>
+        </div>
+        <a href="/about" class="btn btn-sm btn-outline">Full About Us Page →</a>
+      </div>
+      <div class="dashboard-team-grid">
+        <div class="dev-mini-card">
+          <img src="/images/divyanshu.jpg" alt="Divyanshu Tripathi" class="dev-mini-photo" />
+          <div>
+            <b>Divyanshu Tripathi</b>
+            <small class="text-emerald">Lead Full-Stack Developer</small>
+            <p>System architecture, backend algorithms, real-time live telemetry, UI/UX.</p>
+          </div>
+        </div>
+        <div class="dev-mini-card">
+          <img src="/images/pranjal.png" alt="Pranjal Shahi" class="dev-mini-photo" />
+          <div>
+            <b>Pranjal Shahi</b>
+            <small class="text-emerald">IoT Hardware Engineer</small>
+            <p>ESP32 microcontroller firmware, analog sensor calibration & circuits.</p>
+          </div>
+        </div>
+        <div class="team-mini-list">
+          <span class="team-mini-title">PROJECT TEAM MEMBERS:</span>
+          <div class="team-pills">
+            <span class="team-pill"><b>Divyanshu Tripathi</b> (Developer)</span>
+            <span class="team-pill"><b>Pranjal Shahi</b> (Developer)</span>
+            <span class="team-pill"><b>Kritika Singh</b> (Quality Research)</span>
+            <span class="team-pill"><b>Pallavi Dubey</b> (Documentation)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
+
+<!-- Pass Server State to Browser JavaScript -->
+<script id="foodguard-dashboard-config" type="text/template">
+<%- JSON.stringify({
+  selectedFood: selectedFood,
+  activeFoodProfile: profile || {},
+  allFoods: foods || [],
+  latestReading: latest || null,
+  recentHistory: history ? history.slice(0, 15).reverse() : []
+}) %>
+</script>
+<script>
+  try {
+    window.FOODGUARD_CONFIG = JSON.parse(document.getElementById('foodguard-dashboard-config').textContent || '{}');
+  } catch (e) {
+    window.FOODGUARD_CONFIG = { selectedFood: 'milk', activeFoodProfile: {}, allFoods: [], latestReading: null, recentHistory: [] };
+  }
+</script>

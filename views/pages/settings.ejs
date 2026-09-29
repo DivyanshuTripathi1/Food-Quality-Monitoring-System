@@ -1,0 +1,188 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'settings' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <h1>System Settings & Calibration</h1>
+        <p>Operational modes, sensor calibration offsets, simulator toggles, and data retention policies.</p>
+      </div>
+      <div class="heading-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('settingsForm').requestSubmit()">💾 Save Settings</button>
+      </div>
+    </div>
+
+    <div class="settings-grid-layout">
+      <!-- Settings Form Card -->
+      <section class="card settings-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>⚙</span>
+            <b>Operational Configuration</b>
+          </div>
+          <span class="badge badge-emerald">Persisted</span>
+        </div>
+
+        <form id="settingsForm" onsubmit="saveSettings(event)">
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>ESP32 Simulator (Mock Engine)</b>
+              <p>Simulates continuous sensor telemetry when real ESP32 hardware is not currently streaming.</p>
+            </div>
+            <label class="switch-control">
+              <input type="checkbox" id="setMockEsp32" name="mockEsp32" <%= settings.mockEsp32 ? 'checked' : '' %>>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Simulator Interval (Seconds)</b>
+              <p>Frequency in seconds at which the background simulator generates new food readings.</p>
+            </div>
+            <div class="setting-input">
+              <input type="number" id="setMockInterval" name="mockIntervalSeconds" min="2" max="300" value="<%= settings.mockIntervalSeconds || 10 %>" class="form-control" style="width: 100px;">
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Historical Data Retention (Days)</b>
+              <p>Sensor readings older than this threshold are purged during rolling cleanup.</p>
+            </div>
+            <div class="setting-input">
+              <select id="setHistoryDays" name="historyDays" class="form-control" style="width: 130px;">
+                <option value="7" <%= settings.historyDays === 7 ? 'selected' : '' %>>7 Days</option>
+                <option value="14" <%= settings.historyDays === 14 ? 'selected' : '' %>>14 Days</option>
+                <option value="20" <%= settings.historyDays === 20 ? 'selected' : '' %>>20 Days</option>
+                <option value="30" <%= settings.historyDays === 30 ? 'selected' : '' %>>30 Days</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Audible Spoilage Buzzer Alarm</b>
+              <p>Play browser alarm sound when a SPOILED reading is received.</p>
+            </div>
+            <label class="switch-control">
+              <input type="checkbox" id="setSoundAlerts" name="soundAlerts" <%= settings.soundAlerts ? 'checked' : '' %>>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Device Identifier (Node Name)</b>
+              <p>Unique hardware ID advertised by the ESP32 node.</p>
+            </div>
+            <div class="setting-input">
+              <input type="text" id="setDeviceId" name="deviceId" value="<%= settings.deviceId %>" class="form-control" style="width: 220px;">
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Wi-Fi Network SSID</b>
+              <p>Default access point name the device connects to.</p>
+            </div>
+            <div class="setting-input">
+              <input type="text" id="setWifiSsid" name="wifiSsid" value="<%= settings.wifiSsid %>" class="form-control" style="width: 220px;">
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Local Server IP Address</b>
+              <p>Host machine address for ESP32 HTTP POST target.</p>
+            </div>
+            <div class="setting-input">
+              <input type="text" id="setIpAddress" name="ipAddress" value="<%= settings.ipAddress %>" class="form-control" style="width: 220px;">
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>pH Sensor Calibration Offset</b>
+              <p>Offset added to raw pH readings to correct probe drift (e.g. ±0.15).</p>
+            </div>
+            <div class="setting-input">
+              <input type="number" id="setPhOffset" name="phCalibrationOffset" step="0.01" value="<%= settings.phCalibrationOffset || 0 %>" class="form-control" style="width: 100px;">
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <b>Temperature Sensor Offset (°C)</b>
+              <p>Calibrated temperature compensation offset.</p>
+            </div>
+            <div class="setting-input">
+              <input type="number" id="setTempOffset" name="tempOffset" step="0.1" value="<%= settings.tempOffset || 0 %>" class="form-control" style="width: 100px;">
+            </div>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn btn-primary">💾 Save All Settings</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Database Maintenance Card -->
+      <section class="card db-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🗄️</span>
+            <b>Database Operations & Demo Seeding</b>
+          </div>
+        </div>
+
+        <div class="db-actions-list">
+          <div class="db-action-item">
+            <div>
+              <b>Re-Seed Realistic Demo Data</b>
+              <p class="text-muted">Generates 20 days of historical sensor readings across all 5 food categories for testing and demonstrations.</p>
+            </div>
+            <button class="btn btn-emerald" onclick="reseedDemoData()">🌱 Re-Seed Data</button>
+          </div>
+
+          <div class="db-action-item">
+            <div>
+              <b>Full JSON Database Backup</b>
+              <p class="text-muted">Download all stored sensor records in JSON format for offline backup or research analysis.</p>
+            </div>
+            <a href="/api/history" class="btn btn-outline" target="_blank">⇩ Download JSON</a>
+          </div>
+
+          <div class="db-action-item">
+            <div>
+              <b>Wipe Database (Clear All Readings)</b>
+              <p class="text-muted">Permanently deletes all historical readings from the local store. Useful before starting a fresh hardware test session.</p>
+            </div>
+            <button class="btn btn-outline-danger" onclick="confirmClearHistory()">🗑️ Wipe Database</button>
+          </div>
+        </div>
+
+        <div class="system-meta-box">
+          <small class="text-muted">SYSTEM TELEMETRY</small>
+          <div class="meta-row">
+            <span>Node.js:</span>
+            <b><%= process.version %></b>
+          </div>
+          <div class="meta-row">
+            <span>Storage Engine:</span>
+            <b>Local Atomic JSON Store</b>
+          </div>
+          <div class="meta-row">
+            <span>Hardware Ingestion:</span>
+            <code>POST /api/sensor-data</code>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

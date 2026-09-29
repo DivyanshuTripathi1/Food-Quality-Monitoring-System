@@ -1,0 +1,226 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'food-types' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <div class="page-heading">
+      <div>
+        <h1>Food Types & Safety Thresholds</h1>
+        <p>Configured sensor thresholds, physicochemical tolerances, and evaluation parameters for each food category.</p>
+      </div>
+      <div class="heading-actions">
+        <button class="btn btn-primary" onclick="openAddFoodModal()">＋ Add New Food Profile</button>
+      </div>
+    </div>
+
+    <!-- Food Profiles Grid -->
+    <div class="food-profiles-grid">
+      <% (allProfiles || []).forEach(f => { %>
+        <section class="card food-profile-card" id="card-<%= f.key %>" style="border-top: 4px solid <%= f.color || '#2d9cdb' %>">
+          <div class="food-card-header">
+            <span class="food-profile-icon"><%= f.icon %></span>
+            <div class="food-profile-title">
+              <h2><%= f.name %></h2>
+              <span class="food-key-badge">ID: <code><%= f.key %></code></span>
+            </div>
+            <% if (!['milk', 'water'].includes(f.key)) { %>
+              <button class="btn-icon-danger" onclick="deleteFoodProfile('<%= f.key %>', '<%= f.name %>')" title="Delete this food profile">🗑️</button>
+            <% } %>
+          </div>
+
+          <p class="food-profile-desc"><%= f.description %></p>
+
+          <div class="thresholds-list">
+            <div class="threshold-row">
+              <span class="t-label">💧 Safe pH Range:</span>
+              <b class="t-value"><%= f.phMin %> – <%= f.phMax %> <small>(opt: <%= f.phOpt %>)</small></b>
+            </div>
+            <div class="threshold-row">
+              <span class="t-label">☁ MQ135 Gas Limit:</span>
+              <b class="t-value">&lt; <%= f.gasMax %> ppm</b>
+            </div>
+            <div class="threshold-row">
+              <span class="t-label">♨ Cold Storage Max:</span>
+              <b class="t-value">≤ <%= f.tempMax %> °C</b>
+            </div>
+            <div class="threshold-row">
+              <span class="t-label">💧 Humidity Range:</span>
+              <b class="t-value"><%= f.humidityMin %> – <%= f.humidityMax %>%</b>
+            </div>
+            <div class="threshold-row">
+              <span class="t-label">◉ TDS / Turbidity:</span>
+              <b class="t-value">TDS ≤ <%= f.tdsMax %> | &lt; <%= f.turbidityMax %> NTU</b>
+            </div>
+            <div class="threshold-row">
+              <span class="t-label">👁 Expected Color:</span>
+              <b class="t-value"><%= f.expectedColor || 'Normal' %></b>
+            </div>
+          </div>
+
+          <div class="food-card-actions">
+            <a href="/?food=<%= f.key %>" class="btn btn-sm btn-outline">Monitor on Dashboard →</a>
+            <button class="btn btn-sm btn-secondary" onclick="openEditFoodByKey('<%= f.key %>')">✏️ Edit Limits</button>
+          </div>
+        </section>
+      <% }) %>
+    </div>
+  </section>
+</main>
+
+<!-- Add Food Profile Modal -->
+<div id="addFoodModal" class="modal-backdrop" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>＋ Add New Food Profile</h3>
+      <button class="modal-close" onclick="closeAddFoodModal()">✕</button>
+    </div>
+    <form id="addFoodForm" onsubmit="submitAddFood(event)">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="newFoodKey">Unique Key (slug)</label>
+            <input type="text" id="newFoodKey" name="key" placeholder="e.g. fish, juice, cheese" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodName">Display Name</label>
+            <input type="text" id="newFoodName" name="name" placeholder="e.g. Fresh Fish" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodIcon">Emoji Icon</label>
+            <input type="text" id="newFoodIcon" name="icon" value="🐟" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodColor">Accent Color</label>
+            <input type="color" id="newFoodColor" name="color" value="#3498db">
+          </div>
+          <div class="form-group">
+            <label for="newFoodPhMin">Min pH</label>
+            <input type="number" id="newFoodPhMin" name="phMin" step="0.1" value="6.0" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodPhMax">Max pH</label>
+            <input type="number" id="newFoodPhMax" name="phMax" step="0.1" value="6.8" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodGasMax">Max MQ135 Gas (ppm)</label>
+            <input type="number" id="newFoodGasMax" name="gasMax" value="180" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodTempMax">Max Storage Temp (°C)</label>
+            <input type="number" id="newFoodTempMax" name="tempMax" step="0.1" value="4.0" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodHumidityMin">Min Humidity (%)</label>
+            <input type="number" id="newFoodHumidityMin" name="humidityMin" value="50" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodHumidityMax">Max Humidity (%)</label>
+            <input type="number" id="newFoodHumidityMax" name="humidityMax" value="80" required>
+          </div>
+          <div class="form-group">
+            <label for="newFoodTdsMax">Max TDS</label>
+            <input type="number" id="newFoodTdsMax" name="tdsMax" step="0.1" value="6.0">
+          </div>
+          <div class="form-group">
+            <label for="newFoodColorDesc">Expected Appearance</label>
+            <input type="text" id="newFoodColorDesc" name="expectedColor" value="Fresh / Translucent">
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="newFoodDesc">Description & Spoilage Characteristics</label>
+            <textarea id="newFoodDesc" name="description" rows="2" placeholder="Sensory notes and cold chain requirements..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeAddFoodModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Food Profile Modal -->
+<div id="editFoodModal" class="modal-backdrop" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="editModalTitle">✏️ Edit Food Thresholds</h3>
+      <button class="modal-close" onclick="closeEditFoodModal()">✕</button>
+    </div>
+    <form id="editFoodForm" onsubmit="submitEditFood(event)">
+      <input type="hidden" id="editFoodKey" name="key">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="editFoodName">Display Name</label>
+            <input type="text" id="editFoodName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodIcon">Emoji Icon</label>
+            <input type="text" id="editFoodIcon" name="icon" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodPhMin">Min pH</label>
+            <input type="number" id="editFoodPhMin" name="phMin" step="0.05" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodPhMax">Max pH</label>
+            <input type="number" id="editFoodPhMax" name="phMax" step="0.05" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodGasMax">Max MQ135 Gas (ppm)</label>
+            <input type="number" id="editFoodGasMax" name="gasMax" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodTempMax">Max Storage Temp (°C)</label>
+            <input type="number" id="editFoodTempMax" name="tempMax" step="0.1" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodHumidityMin">Min Humidity (%)</label>
+            <input type="number" id="editFoodHumidityMin" name="humidityMin" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodHumidityMax">Max Humidity (%)</label>
+            <input type="number" id="editFoodHumidityMax" name="humidityMax" required>
+          </div>
+          <div class="form-group">
+            <label for="editFoodTdsMax">Max TDS</label>
+            <input type="number" id="editFoodTdsMax" name="tdsMax" step="0.1">
+          </div>
+          <div class="form-group">
+            <label for="editFoodColorDesc">Expected Appearance</label>
+            <input type="text" id="editFoodColorDesc" name="expectedColor">
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="editFoodDesc">Description & Spoilage Characteristics</label>
+            <textarea id="editFoodDesc" name="description" rows="2"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeEditFoodModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Thresholds</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script id="foodProfilesData" type="text/template">
+<%- JSON.stringify(foods || []) %>
+</script>
+<script>
+  function openEditFoodByKey(foodKey) {
+    try {
+      var profiles = JSON.parse(document.getElementById('foodProfilesData').textContent || '[]');
+      var item = profiles.find(function(p) { return p.key === foodKey; });
+      if (item && typeof openEditFoodModal === 'function') {
+        openEditFoodModal(item);
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  }
+</script>
+
+<%- include('../partials/footer') %>

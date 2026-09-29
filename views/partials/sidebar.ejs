@@ -1,0 +1,73 @@
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-mark">🍃</div>
+    <div class="brand-text">
+      <strong>FoodGuard</strong>
+      <span>Smart IoT Quality Monitor</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item <%= active==='dashboard'?'active':'' %>" href="/">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+    <a class="nav-item <%= active==='live'?'active':'' %>" href="/live">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Live Monitoring</span>
+      <span class="pulse-dot" title="Live stream active"></span>
+    </a>
+    <a class="nav-item <%= active==='history'?'active':'' %>" href="/history">
+      <span class="nav-icon">◷</span>
+      <span class="nav-label">Test History</span>
+    </a>
+    <a class="nav-item <%= active==='analytics'?'active':'' %>" href="/analytics">
+      <span class="nav-icon">⌁</span>
+      <span class="nav-label">Analytics</span>
+    </a>
+    <a class="nav-item <%= active==='food-types'?'active':'' %>" href="/food-types">
+      <span class="nav-icon">◇</span>
+      <span class="nav-label">Food Profiles</span>
+    </a>
+    <a class="nav-item <%= active==='device'?'active':'' %>" href="/device">
+      <span class="nav-icon">⚡</span>
+      <span class="nav-label">Device & ESP32</span>
+    </a>
+    <a class="nav-item <%= active==='settings'?'active':'' %>" href="/settings">
+      <span class="nav-icon">⚙</span>
+      <span class="nav-label">Settings</span>
+    </a>
+    <a class="nav-item <%= active==='about'?'active':'' %>" href="/about">
+      <span class="nav-icon">👥</span>
+      <span class="nav-label">About Us</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-widget">
+    <div class="widget-header">
+      <span>SIMULATOR STATUS</span>
+      <span class="badge <%= (typeof device !== 'undefined' && device && device.mode && device.mode.includes('MOCK')) ? 'badge-demo' : 'badge-hw' %>">
+        <%= (typeof device !== 'undefined' && device && device.mode && device.mode.includes('MOCK')) ? 'DEMO' : 'ESP32' %>
+      </span>
+    </div>
+    <div class="widget-body">
+      <div class="widget-row">
+        <span>Active Node:</span>
+        <b><%= (typeof device !== 'undefined' && device) ? device.id : 'ESP32-FOODGUARD' %></b>
+      </div>
+      <div class="widget-row">
+        <span>Status:</span>
+        <b class="text-green">● Connected</b>
+      </div>
+    </div>
+    <div class="widget-actions">
+      <button class="btn-xs btn-outline-white" id="sidebarReadBtn" onclick="triggerQuickRead()">⚡ Read Sensor</button>
+      <button class="btn-xs btn-outline-amber" id="sidebarAnomalyBtn" onclick="triggerQuickAnomaly()">⚠️ Anomaly</button>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <p>Multi-Parameter Food Quality System</p>
+    <small>IoT & Sensor Analytics · v1.5</small>
+  </div>
+</aside>

@@ -1,0 +1,229 @@
+<%- include('../partials/header') %>
+<%- include('../partials/sidebar', { active: 'about' }) %>
+
+<main class="main">
+  <%- include('../partials/topbar') %>
+
+  <section class="content">
+    <!-- Page Heading -->
+    <div class="page-heading">
+      <div>
+        <h1>About FoodGuard & Engineering Team</h1>
+        <p>Smart Multi-Parameter Food Quality Detection System · Final Year Engineering Project</p>
+      </div>
+      <div class="heading-actions">
+        <a href="/" class="btn btn-primary">Open Dashboard →</a>
+      </div>
+    </div>
+
+    <!-- Project Mission Hero -->
+    <div class="about-hero-card">
+      <div class="about-hero-text">
+        <span class="badge badge-emerald" style="margin-bottom:12px; display:inline-block;">Final Year Engineering Capstone</span>
+        <h2>Revolutionizing Food Safety with IoT & Multi-Sensor Telemetry</h2>
+        <p>
+          FoodGuard is an advanced, automated food quality assessment and spoilage detection platform designed to eliminate reliance on subjective sensory checks. 
+          By interfacing precision physicochemical sensors (analog pH, MQ-135 volatile organic gas detector, cold-chain temperature, humidity, and TDS solids) with an ESP32 microcontroller, 
+          FoodGuard delivers real-time quality score verdicts, instant contamination alerts, and historical safety auditing.
+        </p>
+        <div class="hero-highlights">
+          <div class="highlight-chip">⚡ Real-Time IoT Telemetry</div>
+          <div class="highlight-chip">🔬 Multi-Parameter Rule Engine</div>
+          <div class="highlight-chip">☁ MQ-135 Volatile Gas Sensing</div>
+          <div class="highlight-chip">📷 Optical Sample Inspection</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lead Developers Section -->
+    <div class="section-title-wrap">
+      <span class="section-badge">CORE DEVELOPERS</span>
+      <h2>System Architects & Lead Engineers</h2>
+      <p class="text-muted">The core software and hardware developers behind the FoodGuard platform architecture.</p>
+    </div>
+
+    <div class="developers-grid">
+      <!-- Developer 1: Divyanshu Tripathi -->
+      <section class="card dev-card">
+        <div class="dev-photo-wrap">
+          <img src="/images/divyanshu.jpg" alt="Divyanshu Tripathi" class="dev-photo" />
+          <span class="dev-verified-badge" title="Lead Developer">★</span>
+        </div>
+        <div class="dev-details">
+          <span class="dev-badge-role">System Architect & Full-Stack</span>
+          <h3 class="dev-name">Divyanshu Tripathi</h3>
+          <p class="dev-role">Lead Full-Stack Developer</p>
+          <p class="dev-bio">
+            Architected the complete MVC framework, Express REST APIs, multi-parameter food quality evaluation engine, 
+            real-time telemetry streaming, Chart.js analytics, camera inspection module, and responsive modern UI design system.
+          </p>
+          <div class="dev-skills">
+            <span class="skill-tag">Full-Stack Web</span>
+            <span class="skill-tag">Node.js / Express</span>
+            <span class="skill-tag">IoT Architecture</span>
+            <span class="skill-tag">Evaluation Algorithms</span>
+            <span class="skill-tag">UI/UX Design</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Developer 2: Pranjal Shahi -->
+      <section class="card dev-card">
+        <div class="dev-photo-wrap">
+          <img src="/images/pranjal.png" alt="Pranjal Shahi" class="dev-photo" />
+          <span class="dev-verified-badge" title="IoT Hardware Developer">★</span>
+        </div>
+        <div class="dev-details">
+          <span class="dev-badge-role">IoT & Embedded Systems</span>
+          <h3 class="dev-name">Pranjal Shahi</h3>
+          <p class="dev-role">IoT Hardware Engineer & Developer</p>
+          <p class="dev-bio">
+            Engineered the ESP32 microcontroller firmware, analog sensor signal acquisition (MQ-135, pH probe, TDS), 
+            hardware wiring circuits, cold chain temperature monitoring, and Wi-Fi HTTP telemetry integration.
+          </p>
+          <div class="dev-skills">
+            <span class="skill-tag">ESP32 Firmware</span>
+            <span class="skill-tag">Embedded C/C++</span>
+            <span class="skill-tag">Circuit Design</span>
+            <span class="skill-tag">MQ-135 Gas Sensing</span>
+            <span class="skill-tag">Hardware Telemetry</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Complete Project Team Section -->
+    <div class="section-title-wrap" style="margin-top: 40px;">
+      <span class="section-badge">PROJECT TEAM</span>
+      <h2>Final Year Project Members</h2>
+      <p class="text-muted">Dedicated engineering students collaborating on research, implementation, and quality verification.</p>
+    </div>
+
+    <div class="team-grid">
+      <!-- Member 1: Divyanshu Tripathi -->
+      <div class="card team-member-card">
+        <div class="member-header">
+          <img src="/images/divyanshu.jpg" alt="Divyanshu Tripathi" class="member-photo" />
+          <div>
+            <h4>Divyanshu Tripathi</h4>
+            <span class="member-tag">Developer & Team Lead</span>
+          </div>
+        </div>
+        <p class="member-contribution">
+          Full-stack software architecture, Express REST API, automated evaluation logic, real-time live telemetry, and UI styling.
+        </p>
+      </div>
+
+      <!-- Member 2: Pranjal Shahi -->
+      <div class="card team-member-card">
+        <div class="member-header">
+          <img src="/images/pranjal.png" alt="Pranjal Shahi" class="member-photo" />
+          <div>
+            <h4>Pranjal Shahi</h4>
+            <span class="member-tag">Developer & IoT Engineer</span>
+          </div>
+        </div>
+        <p class="member-contribution">
+          ESP32 firmware development, analog sensor calibration, hardware circuit prototyping, and Wi-Fi transmission.
+        </p>
+      </div>
+
+      <!-- Member 3: Kritika Singh -->
+      <div class="card team-member-card">
+        <div class="member-header">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #be185d);">KS</div>
+          <div>
+            <h4>Kritika Singh</h4>
+            <span class="member-tag">Quality Research & Testing</span>
+          </div>
+        </div>
+        <p class="member-contribution">
+          Food spoilage biochemical threshold research, reference standards verification, sample testing, and validation analytics.
+        </p>
+      </div>
+
+      <!-- Member 4: Pallavi Dubey -->
+      <div class="card team-member-card">
+        <div class="member-header">
+          <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">PD</div>
+          <div>
+            <h4>Pallavi Dubey</h4>
+            <span class="member-tag">Analytics & Documentation</span>
+          </div>
+        </div>
+        <p class="member-contribution">
+          Experimental documentation, technical report authoring, accuracy evaluation, and project presentation assets.
+        </p>
+      </div>
+    </div>
+
+    <!-- System Architecture & Technical Specifications -->
+    <div class="grid mid-grid" style="margin-top: 40px;">
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🔌</span>
+            <b>Hardware Stack & Sensors</b>
+          </div>
+          <span class="badge badge-emerald">Edge IoT</span>
+        </div>
+        <div class="tech-spec-list">
+          <div class="spec-item">
+            <b>ESP32 Microcontroller:</b>
+            <span>Dual-core 240MHz Tensilica Xtensa, integrated 802.11 b/g/n Wi-Fi & Bluetooth, 12-bit ADC channels.</span>
+          </div>
+          <div class="spec-item">
+            <b>MQ-135 Gas Sensor:</b>
+            <span>Semiconductor gas sensor sensitive to Ammonia (NH3), NOx, alcohol, benzene, smoke, and CO2 emitted during microbial degradation.</span>
+          </div>
+          <div class="spec-item">
+            <b>Precision pH Probe:</b>
+            <span>Electrochemical glass electrode measuring hydrogen-ion activity (0–14 pH) to detect lactic acidification or alkaline deterioration.</span>
+          </div>
+          <div class="spec-item">
+            <b>DS18B20 / DHT11 Sensors:</b>
+            <span>Precision digital temperature and relative humidity sensing for cold chain monitoring.</span>
+          </div>
+          <div class="spec-item">
+            <b>TDS & Turbidity Sensor:</b>
+            <span>Conductivity and optical light scattering measurement for liquid purity verification.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>💻</span>
+            <b>Software Architecture</b>
+          </div>
+          <span class="badge badge-subtle">MVC Framework</span>
+        </div>
+        <div class="tech-spec-list">
+          <div class="spec-item">
+            <b>Backend Engine:</b>
+            <span>Node.js & Express 5 implementing clean Model-View-Controller (MVC) separation of concerns.</span>
+          </div>
+          <div class="spec-item">
+            <b>View Layer:</b>
+            <span>Server-side rendered EJS templates enriched with dynamic client-side DOM reconciliation.</span>
+          </div>
+          <div class="spec-item">
+            <b>Visual Analytics:</b>
+            <span>Chart.js 4 powering multi-axis trend analytics, donut classification splits, and correlation graphs.</span>
+          </div>
+          <div class="spec-item">
+            <b>Audio & Vision APIs:</b>
+            <span>Web Audio API for synthesized local buzzer alarms and HTML5 MediaDevices for webcam sample inspection.</span>
+          </div>
+          <div class="spec-item">
+            <b>Data Persistence:</b>
+            <span>Atomic JSON datastores with automated 20-day rolling window data retention and CSV export streaming.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
