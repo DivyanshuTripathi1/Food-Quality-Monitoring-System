@@ -20,6 +20,8 @@ router.post('/simulate/anomaly', c.simulateAnomaly);
 router.get('/settings', c.getSettings);
 router.post('/settings', c.updateSettings);
 
+router.get('/analytics', c.analytics);
+router.get('/readings/:id', c.getReading);
 router.delete('/readings/:id', c.deleteReading);
 router.post('/readings/clear', c.clearReadings);
 router.post('/readings/seed', c.seedReadings);

@@ -10,12 +10,16 @@ exports.status = (req, res) => {
   const latestReading = readingModel.latest(food);
   const device = deviceModel.get();
   const profile = foodModel.getByKey(food);
+  const stats = readingModel.getStats(food);
+  const history = readingModel.getAll({ foodType: food, limit: 15 });
   res.json({
     success: true,
     data: latestReading,
     food,
     profile,
     device,
+    stats,
+    history,
     serverTime: new Date().toISOString()
   });
 };
@@ -182,6 +186,33 @@ exports.updateSettings = (req, res) => {
   } catch (e) {
     res.status(500).json({ success: false, message: e.message });
   }
+};
+
+exports.getReading = (req, res) => {
+  const row = readingModel.getById(req.params.id);
+  const profile = row ? foodModel.getByKey(row.foodType) : null;
+  const device = deviceModel.get();
+  if (!row) {
+    return res.status(404).json({ success: false, message: 'Reading not found' });
+  }
+  res.json({
+    success: true,
+    data: row,
+    profile,
+    device
+  });
+};
+
+exports.analytics = (req, res) => {
+  const food = req.query.food || 'all';
+  const stats = readingModel.getStats(food !== 'all' ? food : null);
+  const rows = readingModel.getAll(food !== 'all' ? food : {});
+  res.json({
+    success: true,
+    selectedFood: food,
+    stats,
+    rows
+  });
 };
 
 exports.deleteReading = (req, res) => {

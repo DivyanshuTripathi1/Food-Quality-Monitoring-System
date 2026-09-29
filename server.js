@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const morgan = require('morgan');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const apiRoutes = require('./routes/apiRoutes');
@@ -9,22 +10,25 @@ const { startMockEsp32 } = require('./services/mockEsp32Service');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 
-app.use('/', dashboardRoutes);
 app.use('/api', apiRoutes);
+app.use('/', dashboardRoutes);
 
-app.use((req, res) => res.status(404).render('pages/404', {
-  title: 'Page Not Found',
-  active: '',
-  device: require('./models/deviceModel').get(),
-  foods: require('./models/foodModel').getAll()
-}));
+app.use((req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ success: false, message: 'API endpoint not found' });
+  }
+  const distIndex = path.join(__dirname, 'dist', 'index.html');
+  if (fs.existsSync(distIndex)) {
+    return res.status(404).sendFile(distIndex);
+  }
+  return res.status(404).sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.use((err, req, res, next) => {
   console.error(err);
