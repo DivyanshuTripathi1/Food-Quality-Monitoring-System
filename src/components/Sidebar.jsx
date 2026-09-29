@@ -14,14 +14,29 @@ export default function Sidebar() {
   const isMock = device?.mode?.includes('MOCK');
 
   return (
-    <aside className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} id="sidebar">
-      <div className="brand">
-        <div className="brand-mark">🍃</div>
-        <div className="brand-text">
-          <strong>FoodGuard</strong>
-          <span>Smart IoT Quality Monitor</span>
+    <>
+      {sidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
+      <aside className={`sidebar ${sidebarOpen ? 'mobile-open' : ''}`} id="sidebar">
+        <div className="brand">
+          <div className="brand-mark">🍃</div>
+          <div className="brand-text">
+            <strong>FoodGuard</strong>
+            <span>Smart IoT Quality Monitor</span>
+          </div>
+          <button
+            className="sidebar-close-btn"
+            onClick={closeSidebar}
+            aria-label="Close navigation"
+          >
+            ✕
+          </button>
         </div>
-      </div>
 
       <nav className="sidebar-nav">
         <NavLink
@@ -139,5 +154,6 @@ export default function Sidebar() {
         <small>IoT &amp; Sensor Analytics · v1.5</small>
       </div>
     </aside>
+    </>
   );
 }

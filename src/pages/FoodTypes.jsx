@@ -241,7 +241,12 @@ export default function FoodTypes() {
 
       {/* Add Food Profile Modal */}
       {isAddModalOpen && (
-        <div id="addFoodModal" className="modal-backdrop" style={{ display: 'flex' }}>
+        <div
+          id="addFoodModal"
+          className="modal-backdrop"
+          style={{ display: 'flex' }}
+          onClick={(e) => { if (e.target === e.currentTarget) closeAddModal(); }}
+        >
           <div className="modal-card">
             <div className="modal-header">
               <h3>＋ Add New Food Profile</h3>
@@ -413,7 +418,12 @@ export default function FoodTypes() {
 
       {/* Edit Food Profile Modal */}
       {isEditModalOpen && (
-        <div id="editFoodModal" className="modal-backdrop" style={{ display: 'flex' }}>
+        <div
+          id="editFoodModal"
+          className="modal-backdrop"
+          style={{ display: 'flex' }}
+          onClick={(e) => { if (e.target === e.currentTarget) closeEditModal(); }}
+        >
           <div className="modal-card">
             <div className="modal-header">
               <h3 id="editModalTitle">✏️ Edit Food Thresholds ({editForm.name})</h3>

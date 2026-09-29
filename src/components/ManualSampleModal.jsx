@@ -70,7 +70,12 @@ export default function ManualSampleModal({ onSampleEvaluated }) {
   };
 
   return (
-    <div id="manualSampleModal" className="modal-backdrop" style={{ display: 'flex' }}>
+    <div
+      id="manualSampleModal"
+      className="modal-backdrop"
+      style={{ display: 'flex' }}
+      onClick={(e) => { if (e.target === e.currentTarget) closeManualModal(); }}
+    >
       <div className="modal-card">
         <div className="modal-header">
           <h3>🔬 Manual Food Sample Test</h3>
