@@ -24,7 +24,20 @@ function readAll() {
 }
 
 function writeAll(items) {
-  fs.writeFileSync(file, JSON.stringify(items, null, 2));
+  const content = JSON.stringify(items, null, 2);
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      fs.writeFileSync(file, content);
+      return;
+    } catch (err) {
+      if (attempt === 2) {
+        console.warn('Warning: Could not write readings.json due to temporary file lock:', err.message);
+      } else {
+        const start = Date.now();
+        while (Date.now() - start < 50) {} // 50ms sync backoff
+      }
+    }
+  }
 }
 
 function cutoff() {
